@@ -1,0 +1,20 @@
+{
+    "fileName": "MechID.json",
+    "name": "MechID",
+    "version": "2026.1.0",
+    "frcYear": "2026",
+    "uuid": "d37f90a6-8b52-4f2a-bcde-27c55ead9f87",
+    "mavenUrls": [
+        "https://frc2852.github.io/MechID/maven/"
+    ],
+    "jsonUrl": "https://frc2852.github.io/MechID/MechID.json",
+    "javaDependencies": [
+        {
+            "groupId": "com.frc2852.mechid",
+            "artifactId": "mechid-java",
+            "version": "2026.1.0"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}

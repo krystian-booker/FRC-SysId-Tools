@@ -1,0 +1,13 @@
+.gradle/
+build/
+bin/
+.vscode/
+.idea/
+*.iml
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+dist/
+*.egg-info/
+analysis/out/

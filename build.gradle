@@ -1,0 +1,5 @@
+// Root project is a container only; the Java library lives in mechid-java/,
+// the Python/MATLAB analysis tool in analysis/, and the vendordep JSON in vendordep/.
+wrapper {
+    gradleVersion = '8.11'
+}

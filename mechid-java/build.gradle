@@ -1,0 +1,56 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.frc2852.mechid'
+version = '2026.1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'WPILibRelease'
+        url = 'https://frcmaven.wpi.edu/artifactory/release/'
+    }
+    maven {
+        name = 'CTRERelease'
+        url = 'https://maven.ctr-electronics.com/release/'
+    }
+    maven {
+        name = 'REVRelease'
+        url = 'https://maven.revrobotics.com/'
+    }
+}
+
+// Compile against the same versions the robot project uses; the robot project
+// provides these at runtime (GradleRIO + vendordeps), so they are compileOnly here.
+def wpilibVersion = '2026.2.1'
+def phoenix6Version = '26.1.3'
+def revlibVersion = '2026.0.5'
+
+dependencies {
+    compileOnly "edu.wpi.first.wpilibj:wpilibj-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.wpiutil:wpiutil-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.wpimath:wpimath-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.wpiunits:wpiunits-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.ntcore:ntcore-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.hal:hal-java:${wpilibVersion}"
+    compileOnly "edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:${wpilibVersion}"
+    compileOnly "com.ctre.phoenix6:wpiapi-java:${phoenix6Version}"
+    compileOnly "com.revrobotics.frc:REVLib-java:${revlibVersion}"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifactId = 'mechid-java'
+        }
+    }
+}
