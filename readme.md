@@ -87,6 +87,22 @@ leaders. Everything is overridable (`withQuasistaticRamp`, `withDynamicSteps`,
 Every motor is recorded either way, so the current-limit analysis budgets the whole
 group. Supports any number of motors.
 
+**FOC (Krakens with Phoenix Pro)** — characterize the way the mechanism runs in
+matches. For a mechanism driven with FOC control requests, excite with FOC and use the
+FOC motor constants:
+
+```java
+MechIdConfig.flywheel("flywheel", leaderMotor, MotorModel.KRAKEN_X60_FOC)
+        .withFoc(true)
+```
+
+`MotorModel` carries both variants of each Kraken (`KRAKEN_X60`/`KRAKEN_X60_FOC`,
+`KRAKEN_X44`/`KRAKEN_X44_FOC`, WPILib dyno numbers) — the FOC variants have ~30% more
+torque per amp and slightly lower free speed, which changes the current-limit sweep
+meaningfully. MechID warns if `withFoc` and the model variant disagree. FOC requires a
+Pro-licensed device; an unlicensed FOC request faults rather than running. kS/kV/kA
+differ between modes, so re-characterize when switching a mechanism between them.
+
 Swerve (CTRE template — `CommandSwerveDrivetrain`):
 
 ```java

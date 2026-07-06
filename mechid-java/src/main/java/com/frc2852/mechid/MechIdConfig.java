@@ -326,7 +326,15 @@ public class MechIdConfig {
         return this;
     }
 
-    /** Use FOC on the voltage requests (TalonFX with Phoenix Pro only). Default false. */
+    /**
+     * Excite the mechanism with FOC-enabled voltage requests (TalonFX only; the device
+     * must carry a Phoenix Pro license or the request faults). Default false.
+     *
+     * <p>Characterize the way the mechanism runs in matches: FOC excitation with an
+     * {@code _FOC} motor model for FOC mechanisms, both off for trapezoidal. FOC and
+     * trapezoidal produce different kS/kV/kA, so a mechanism switched between modes
+     * should be re-characterized.
+     */
     public MechIdConfig withFoc(boolean foc) {
         this.useFoc = foc;
         return this;
@@ -402,6 +410,13 @@ public class MechIdConfig {
             coastdownEnabled = false;
             DriverStation.reportWarning("[MechID] '" + name + "': coast-down test disabled — "
                     + leader.vendorName() + " cannot force coast mode", false);
+        }
+        if (useFoc != motorModel.isFoc() && motorModel != MotorModel.NEO_VORTEX) {
+            DriverStation.reportWarning(String.format(
+                    "[MechID] '%s': FOC excitation is %s but motor model %s is the %s variant — "
+                            + "current-limit modeling will be off; pair withFoc(%b) with the matching model",
+                    name, useFoc ? "ON" : "OFF", motorModel.name(),
+                    motorModel.isFoc() ? "FOC" : "trapezoidal", useFoc), false);
         }
     }
 

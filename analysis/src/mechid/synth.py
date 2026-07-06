@@ -18,8 +18,12 @@ import numpy as np
 MOTOR_SPECS = {
     "KRAKEN_X60": {"nominalVoltage": 12.0, "stallTorqueNm": 7.09, "stallCurrentAmps": 366.0,
                    "freeCurrentAmps": 2.0, "freeSpeedRpm": 6000.0},
-    "KRAKEN_X44": {"nominalVoltage": 12.0, "stallTorqueNm": 4.05, "stallCurrentAmps": 275.0,
-                   "freeCurrentAmps": 1.4, "freeSpeedRpm": 7530.0},
+    "KRAKEN_X60_FOC": {"nominalVoltage": 12.0, "stallTorqueNm": 9.37, "stallCurrentAmps": 483.0,
+                       "freeCurrentAmps": 2.0, "freeSpeedRpm": 5800.0},
+    "KRAKEN_X44": {"nominalVoltage": 12.0, "stallTorqueNm": 4.11, "stallCurrentAmps": 279.0,
+                   "freeCurrentAmps": 2.0, "freeSpeedRpm": 7758.0},
+    "KRAKEN_X44_FOC": {"nominalVoltage": 12.0, "stallTorqueNm": 5.01, "stallCurrentAmps": 329.0,
+                       "freeCurrentAmps": 2.0, "freeSpeedRpm": 7368.0},
     "NEO_VORTEX": {"nominalVoltage": 12.0, "stallTorqueNm": 3.60, "stallCurrentAmps": 211.0,
                    "freeCurrentAmps": 3.6, "freeSpeedRpm": 6784.0},
 }
@@ -107,6 +111,12 @@ PRESETS: dict[str, tuple[Truth, RoutineSpec]] = {
         Truth(kS=0.20, kV=0.112, kA=0.005, ratio=1.0, motor="NEO_VORTEX"),
         RoutineSpec("FLYWHEEL", "VELOCITY", "NONE", 0.5, 10.0, [2.0, 4.0, 6.0, 8.0, 10.0], 3.0,
                     coastdown=False, settle_tol=0.5, acc_available=False),
+    ),
+    # Kraken X60 running field-oriented control (FOC-equivalent motor constants).
+    "FLYWHEEL_FOC": (
+        Truth(kS=0.20, kV=0.132, kA=0.006, ratio=1.0, motor="KRAKEN_X60_FOC"),
+        RoutineSpec("FLYWHEEL", "VELOCITY", "NONE", 0.5, 10.0, [2.0, 4.0, 6.0, 8.0, 10.0], 3.0,
+                    coastdown=True, settle_tol=0.5),
     ),
 }
 

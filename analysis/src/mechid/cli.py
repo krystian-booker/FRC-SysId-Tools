@@ -45,7 +45,8 @@ def main(argv: list[str] | None = None) -> int:
 
     ps = sub.add_parser("synth", help="Generate a synthetic session (pipeline demo/testing)")
     ps.add_argument("mech_type",
-                    choices=["TURRET", "ELEVATOR", "ARM", "FLYWHEEL", "SWERVE_DRIVE", "VORTEX_ROLLER"])
+                    choices=["TURRET", "ELEVATOR", "ARM", "FLYWHEEL", "SWERVE_DRIVE",
+                             "VORTEX_ROLLER", "FLYWHEEL_FOC"])
     ps.add_argument("--out", default=None)
     ps.add_argument("--seed", type=int, default=42)
 

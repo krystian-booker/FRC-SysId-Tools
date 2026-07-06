@@ -16,7 +16,7 @@ from mechid.options import AnalysisOptions
 from mechid.session import load_session
 from mechid.synth import generate
 
-MECHS = ["TURRET", "ELEVATOR", "ARM", "FLYWHEEL", "SWERVE_DRIVE", "VORTEX_ROLLER"]
+MECHS = ["TURRET", "ELEVATOR", "ARM", "FLYWHEEL", "SWERVE_DRIVE", "VORTEX_ROLLER", "FLYWHEEL_FOC"]
 
 
 def _check(results: dict, truth: dict, tol: float):
